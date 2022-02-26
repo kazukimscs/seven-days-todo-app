@@ -15,9 +15,6 @@ class UsersController < ApplicationController
         user: user,
         error_messages: user.errors.full_messages
       }
-      #flash[:user] = user
-      #flash[:error_messages] = user.errors.full_messages
-      #redirect_back fallback_location: 'http://localhost'
     end
   end
 
