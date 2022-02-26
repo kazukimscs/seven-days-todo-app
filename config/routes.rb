@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
+
+  root 'top#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 =begin
@@ -14,7 +16,11 @@ Rails.application.routes.draw do
 
 #delete 'homes/:id', to: 'homes#destroy'
 #リソースベースルーティング
-root 'top#index'
-resources :users, only: %i[new create] #シンボルの配列を表す%記法で書いただけ。
-resources :homes, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :users, only: %i[new create] #シンボルの配列を表す%記法で書いただけ。
+  resources :homes, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :homes do
+    collection do
+      get 'sevendays'
+    end
+  end
 end
