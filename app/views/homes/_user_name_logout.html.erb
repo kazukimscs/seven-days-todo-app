@@ -1,4 +1,4 @@
 <% if current_user %>
   <span class="badge badge-light"><%= current_user.name %></span>
-  <td><%= link_to "ログアウト", logout_path, class: "btn btn-outline-warning my-2 my-sm-0" %></td>
+  <td><%= link_to "ログアウト", logout_path, method: :delete, class: "btn btn-outline-warning my-2 my-sm-0" %></td>
 <% end %>
