@@ -20,6 +20,7 @@
   </head>
 
   <body>
+
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <a class="navbar-brand" href="#">7 days todo app</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,31 +28,55 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <!-- <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
+          <li class="nav-item">
             <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
-          <li class="nav-item">
-            <!-- <a class="nav-link" href="/homes/show">タスク一覧</a> -->
-            <%= link_to "タスク一覧", home_path, class: "nav-link" %>
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">タスク一覧</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <%= link_to "全てのタスク", homes_path, class: "dropdown-item" %>
+              <%= link_to "直近1週間のタスク", sevendays_homes_path, class: "dropdown-item" %>
+            </div>
           </li>
           <li class="nav-item">
-            <!-- <a class="nav-link disabled" href="/homes/new">タスク追加</a> -->
             <%= link_to "タスク追加", new_home_path, class: "nav-link" %>
           </li>
         </ul>
+
+        <%= render partial: 'user_name_logout', locals: { current_user: @current_user }%>
+        
       </div>
     </nav>
 
-    <div class="card">
-      <div class="card-header">
-        <h4><%= @task.content %></h4>
-      </div>
-    </div>
+    <% if flash[:notice] %>
+      <div class="alert alert-primary"><%= flash[:notice] %></div>
+    <% end %>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th style="width: 15%">期限</th>
+          <th style="width: 85%">タスク</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @task.each do |task| %>
+          <tr>
+            <td><%= task.deadline %></td>
+            <td><%= task.content %></td>
+            <!-- パスの自動追加がうまくいかなかったので直接指定した -->
+            <td><%= link_to "編集", edit_home_path(task), class: "btn btn-secondary" %></td>
+            <td><%= link_to '削除', home_path(task), method: :delete, class: "btn btn-danger" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= paginate @task %>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster
+    <!-- Placed at the end of the document so the pages load faster 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="../../assets/js/vendor/popper.min.js"></script>

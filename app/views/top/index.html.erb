@@ -19,7 +19,6 @@
   </head>
 
   <body>
-
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <a class="navbar-brand" href="/">7 days todo app</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,8 +29,12 @@
           <li class="nav-item active">
             <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
-          <li class="nav-item">
-            <%= link_to "タスク一覧", homes_path, class: "nav-link" %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">タスク一覧</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <%= link_to "全てのタスク", homes_path, class: "dropdown-item" %>
+              <%= link_to "直近1週間のタスク", sevendays_homes_path, class: "dropdown-item" %>
+            </div>
           </li>
           <li class="nav-item">
             <%= link_to "タスク追加", new_home_path, class: "nav-link" %>
@@ -64,5 +67,6 @@
 
     <a>登録されてない方は登録を行ってください</a>
     <td><%= link_to "登録", new_user_path, class: "btn btn-success my-2 my-sm-0" %></td>
+
   </body>
 </html>

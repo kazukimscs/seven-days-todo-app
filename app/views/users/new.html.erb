@@ -1,50 +1,74 @@
-<body>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">7 days todo app</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <%= link_to "Home", root_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "タスク一覧", homes_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "タスク追加", new_home_path, class: "nav-link" %>
-        </li>
-      </ul>
-    </div>
-  </nav>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-  <h1>ユーザー登録</h1>
+    <title>Fixed top navbar example for Bootstrap</title>
 
-  <% if flash[:error_messages] %>
-    <div class="alert alert-danger">
-      <ul>
-        <% flash[:error_messages].each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/navbar-fixed/">
 
-  <%= form_for(@user, url: {controller: 'users', action: 'create' }) do |f| %>
-    <div class="form-group">
-      <%= f.label :name, 'ユーザー名' %>
-      <%= f.text_field :name, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :password, 'パスワード' %>
-      <%= f.password_field :password, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= f.label :password_confirmation, 'パスワード（確認）' %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-    </div>
+    <!-- Bootstrap core CSS
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
-    <%= f.submit '作成', class: 'btn btn-primary' %>
-  <% end %>
-</body>
+    <!-- Custom styles for this template
+    <link href="navbar-top-fixed.css" rel="stylesheet"> -->
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">7 days todo app</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%= link_to "Home", root_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">タスク一覧</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <%= link_to "全てのタスク", homes_path, class: "dropdown-item" %>
+              <%= link_to "直近1週間のタスク", sevendays_homes_path, class: "dropdown-item" %>
+            </div>
+          </li>
+          <li class="nav-item">
+            <%= link_to "タスク追加", new_home_path, class: "nav-link" %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <h1>ユーザー登録</h1>
+
+    <% if flash[:error_messages] %>
+      <div class="alert alert-danger">
+        <ul>
+          <% flash[:error_messages].each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_for(@user, url: {controller: 'users', action: 'create' }) do |f| %>
+      <div class="form-group">
+        <%= f.label :name, 'ユーザー名' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password, 'パスワード' %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password_confirmation, 'パスワード（確認）' %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+      
+      <%= f.submit '作成', class: 'btn btn-primary' %>
+    <% end %>
+  </body>
+</html>
