@@ -2,7 +2,7 @@ class HomesController < ApplicationController #controllerを定義するとき�
   protect_from_forgery :except => [:destroy]
 
   def index #indexメソッドの定義
-    @task = Task.page(params[:page]).order(deadline: :asc) #Taskテーブルに保存されている全てのデータを取得してインスタンス変数の@taskに代入する。
+    @task = current_user.tasks.page(params[:page]).order(deadline: :asc) #Taskテーブルに保存されている全てのデータを取得してインスタンス変数の@taskに代入する。
   end
 
   def new
@@ -18,7 +18,8 @@ class HomesController < ApplicationController #controllerを定義するとき�
 
   def create
     #task = Task.create(task_params)
-    task = Task.new(task_params)
+    #task = Task.new(task_params)
+    task = current_user.tasks.new(task_params)
     if task.save
       flash[:notice] = "タスク「#{task.content}」を作成しました"
       redirect_to '/homes'
@@ -31,12 +32,12 @@ class HomesController < ApplicationController #controllerを定義するとき�
   end
 
   def edit
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
   def update
     #ローカル変数taskに代入する。updateアクションではviewを作成しないので、インスタンス変数をviewに渡す必要がないため。
-    task = Task.find(params[:id])
+    task = current_user.tasks.find(params[:id])
     task.update(task_params)
     #flash[:notice] = "タスク「#{task.content}」に変更しました"
     #redirect_to '/homes'
@@ -53,7 +54,7 @@ class HomesController < ApplicationController #controllerを定義するとき�
   end
 
   def destroy
-    task = Task.find(params[:id])
+    task = current_user.tasks.find(params[:id])
     task.delete
     flash[:notice] = "タスク「#{task.content}」を削除しました"
     redirect_to homes_path #'/homes'でもよい
