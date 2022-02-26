@@ -41,6 +41,7 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'rails-ujs', '~> 0.1.0'
 gem 'kaminari'
 gem 'rails-i18n'
+gem 'devise'
 
 
 group :development, :test do
