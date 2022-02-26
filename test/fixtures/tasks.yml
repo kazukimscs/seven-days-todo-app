@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: tasks
+#
+#  id         :bigint           not null, primary key
+#  content    :text
+#  deadline   :date
+#  status     :boolean
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :bigint
+#
+# Indexes
+#
+#  index_tasks_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
+
+one:
+  user: one
+  content: MyText
+  deadline: 2022-02-25
+  status: false
+
+two:
+  user: two
+  content: MyText
+  deadline: 2022-02-25
+  status: false
