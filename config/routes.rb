@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-  #get 'mypage', to: 'users#me'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
-  #get 'top/index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 =begin
@@ -19,5 +17,4 @@ Rails.application.routes.draw do
 root 'top#index'
 resources :users, only: %i[new create] #シンボルの配列を表す%記法で書いただけ。
 resources :homes, only: [:index, :new, :create, :edit, :update, :destroy]
-
 end
