@@ -3,7 +3,7 @@
 * ログイン
 ![login](https://user-images.githubusercontent.com/72600117/155981377-d5de787e-5918-447c-81bb-ca0e15f09c52.png)
 
-* 登録
+* ユーザー登録
 ![new_user](https://user-images.githubusercontent.com/72600117/155981446-79f64370-b12e-42d3-8ddf-f3c2206e3825.png)
 
 * 全てのタスク表示
